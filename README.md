@@ -10,7 +10,7 @@ Welcome to the **Tip Calculator Challenge**! This Ruby on Rails application is a
 
 ### Additional Functionality
 - **Admin Dashboard**:
-  - Accessible at `/admin/dashboard`.
+  - Accessible at `/admin`.
   - Displays all previous tip calculations with the following details:
     - **Bill Amount**
     - **Tip Percentage**
@@ -51,7 +51,7 @@ You can run the application using Docker (recommended) or set it up directly on 
 
 5. **Access the Application**:
    - Tip Calculator: [http://localhost:3000](http://localhost:3000)
-   - Admin Dashboard: [http://localhost:3000/admin/dashboard](http://localhost:3000/admin/dashboard)
+   - Admin Dashboard: [http://localhost:3000/admin](http://localhost:3000/admin)
 
 ---
 
@@ -59,9 +59,9 @@ You can run the application using Docker (recommended) or set it up directly on 
 
 1. **Prerequisites**:
    Ensure you have the following installed:
-   - Ruby (version 3.2 or higher)
-   - Rails (version 7.0 or higher)
-   - PostgreSQL
+   - Ruby (version 3.0.0)
+   - Rails (version 6.1.4)
+   - SQLite3 (bundled with most Ruby installations)
 
 2. **Clone the Repository**:
    ```bash
@@ -76,11 +76,11 @@ You can run the application using Docker (recommended) or set it up directly on 
    ```
 
 4. **Setup the Database**:
-   - Update `config/database.yml` with your local PostgreSQL credentials.
-   - Run the following commands to create, migrate, and seed the database:
-     ```bash
-     rails db:create db:migrate db:seed
-     ```
+   SQLite is already configured in the `config/database.yml` file, so no changes are needed.
+   Run the following commands to create, migrate, and seed the database:
+   ```bash
+   rails db:create db:migrate db:seed
+   ```
 
 5. **Start the Application**:
    ```bash
@@ -89,7 +89,7 @@ You can run the application using Docker (recommended) or set it up directly on 
 
 6. **Access the Application**:
    - Tip Calculator: [http://localhost:3000](http://localhost:3000)
-   - Admin Dashboard: [http://localhost:3000/admin/dashboard](http://localhost:3000/admin/dashboard)
+   - Admin Dashboard: [http://localhost:3000/admin](http://localhost:3000/admin)
 
 ## Approach
 
@@ -102,16 +102,6 @@ You can run the application using Docker (recommended) or set it up directly on 
 - **PostgreSQL**: Database to store tip calculation records.
 - **Docker**: Containerized setup for easy local development.
 - **RSpec & Jest**: For testing the backend and frontend functionality.
-
-## Admin Access
-The admin dashboard is protected and requires admin credentials. You can create an admin user via the Rails console:
-```bash
-docker-compose run --rm app bin/rails console
-```
-Then, create an admin user:
-```ruby
-User.create(email: "admin@example.com", password: "password", admin: true)
-```
 
 ## Testing
 
