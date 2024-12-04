@@ -1,9 +1,17 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
   namespace :admin do
-    get 'dashboard/index'
+    root 'dashboard#index'
   end
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
-  # Defines the root path route ("/")
-  # root "articles#index"
+  # Tip Calculator for users
+  resources :tips, only: [:index, :create] do
+    collection do
+      post :calculate # Defines a route for `tips_calculate_path`
+    end
+  end
+
+  # Set the root route to the tip calculator form
+  root 'tips#index'
 end
