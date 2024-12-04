@@ -1,24 +1,157 @@
-# README
+# Tip Calculator Challenge
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Welcome to the **Tip Calculator Challenge**! This Ruby on Rails application is a web-based tip calculator with an additional **Admin Dashboard** to track past tip calculations. The project demonstrates the use of Ruby on Rails for building functional, user-friendly applications while maintaining clean, maintainable code.
 
-Things you may want to cover:
+## Features
 
-* Ruby version
+### Core Functionality
+- **Tip Calculation**: Users can calculate the tip and total bill amount based on their input.
+- **Per-Person Amount**: Calculate the per-person share for group bills.
 
-* System dependencies
+### Additional Functionality
+- **Admin Dashboard**:
+  - Accessible at `/admin/dashboard`.
+  - Displays all previous tip calculations with the following details:
+    - **Bill Amount**
+    - **Tip Percentage**
+    - **Tip Amount**
+    - **Total Bill**
+    - **Number of People**
+    - **Per-Person Amount**
+    - **Timestamp** of the calculation.
 
-* Configuration
+## Setup
 
-* Database creation
+You can run the application using Docker (recommended) or set it up directly on your local machine. Follow the instructions below for your preferred method.
 
-* Database initialization
+---
 
-* How to run the test suite
+### Option 1: Using Docker (Recommended)
 
-* Services (job queues, cache servers, search engines, etc.)
+1. **Clone the Repository**:
+   ```bash
+   git clone git@github.com:your-username/tip-calculator-challenge.git
+   cd tip-calculator-challenge
+   ```
 
-* Deployment instructions
+2. **Build the Docker Container**:
+   ```bash
+   docker-compose build
+   ```
 
-* ...
+3. **Setup the Database**:
+   ```bash
+   docker-compose run --rm app bin/rails db:setup
+   ```
+
+4. **Start the Application**:
+   ```bash
+   docker-compose up
+   ```
+
+5. **Access the Application**:
+   - Tip Calculator: [http://localhost:3000](http://localhost:3000)
+   - Admin Dashboard: [http://localhost:3000/admin/dashboard](http://localhost:3000/admin/dashboard)
+
+---
+
+### Option 2: Without Docker (Direct Local Setup)
+
+1. **Prerequisites**:
+   Ensure you have the following installed:
+   - Ruby (version 3.2 or higher)
+   - Rails (version 7.0 or higher)
+   - PostgreSQL
+
+2. **Clone the Repository**:
+   ```bash
+   git clone git@github.com:your-username/tip-calculator-challenge.git
+   cd tip-calculator-challenge
+   ```
+
+3. **Install Gems**:
+   Run the following command to install required Ruby gems:
+   ```bash
+   bundle install
+   ```
+
+4. **Setup the Database**:
+   - Update `config/database.yml` with your local PostgreSQL credentials.
+   - Run the following commands to create, migrate, and seed the database:
+     ```bash
+     rails db:create db:migrate db:seed
+     ```
+
+5. **Start the Application**:
+   ```bash
+   rails server
+   ```
+
+6. **Access the Application**:
+   - Tip Calculator: [http://localhost:3000](http://localhost:3000)
+   - Admin Dashboard: [http://localhost:3000/admin/dashboard](http://localhost:3000/admin/dashboard)
+
+## Approach
+
+### Problem-Solving
+- Replicated the functionality of the **Frontend Mentor Tip Calculator** by implementing input-based calculations for bill splitting and tip calculations.
+- Added a database-backed **Admin Dashboard** to track and display all previous tip calculations.
+
+### Technologies Used
+- **Ruby on Rails**: Framework for building the application.
+- **PostgreSQL**: Database to store tip calculation records.
+- **Docker**: Containerized setup for easy local development.
+- **RSpec & Jest**: For testing the backend and frontend functionality.
+
+## Admin Access
+The admin dashboard is protected and requires admin credentials. You can create an admin user via the Rails console:
+```bash
+docker-compose run --rm app bin/rails console
+```
+Then, create an admin user:
+```ruby
+User.create(email: "admin@example.com", password: "password", admin: true)
+```
+
+## Testing
+
+To ensure the application functions correctly, follow these steps:
+
+1. **Start the Application**:
+   ```bash
+   docker-compose up
+   ```
+
+2. **Run Backend Tests**:
+   - **Setup the Test Database**:
+     ```bash
+     docker-compose run -e "RAILS_ENV=test" app rake db:create db:migrate
+     ```
+   - **Run All Tests**:
+     ```bash
+     docker-compose run -e "RAILS_ENV=test" app rails test
+     ```
+   - **Run Individual Tests**:
+     ```bash
+     docker-compose run -e "RAILS_ENV=test" app rspec spec/path/to/spec.rb
+     ```
+
+3. **Run Frontend Tests**:
+   - Run all tests:
+     ```bash
+     yarn test
+     ```
+   - Run a specific test:
+     ```bash
+     yarn test spec/javascript/path/to/spec.js
+     ```
+
+## Deployment
+
+(Optional) Deploy the application to a platform like **Heroku**, **Fly.io**, or **Render**. Ensure to update the database credentials and environment variables as required.
+
+## Additional Resources
+
+- [Ruby on Rails Guides](https://guides.rubyonrails.org/)
+- [Frontend Mentor Tip Calculator](https://www.frontendmentor.io/challenges/tip-calculator-app-ugJNGbJUX)
+- [Docker Documentation](https://www.docker.com)
