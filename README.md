@@ -127,6 +127,8 @@ To ensure the application functions correctly, follow these steps:
      ```
 
 ## Screenshots
+![Homepage Screenshot](screenshots/homepage_screenshot.png)
+![Dashboard Screenshot](screenshots/dashboard_screenshot.png)
 
 ## Resources
 
