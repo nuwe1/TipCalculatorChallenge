@@ -126,21 +126,9 @@ To ensure the application functions correctly, follow these steps:
      docker-compose run -e "RAILS_ENV=test" app rspec spec/path/to/spec.rb
      ```
 
-3. **Run Frontend Tests**:
-   - Run all tests:
-     ```bash
-     yarn test
-     ```
-   - Run a specific test:
-     ```bash
-     yarn test spec/javascript/path/to/spec.js
-     ```
+## Screenshots
 
-## Deployment
-
-(Optional) Deploy the application to a platform like **Heroku**, **Fly.io**, or **Render**. Ensure to update the database credentials and environment variables as required.
-
-## Additional Resources
+## Resources
 
 - [Ruby on Rails Guides](https://guides.rubyonrails.org/)
 - [Frontend Mentor Tip Calculator](https://www.frontendmentor.io/challenges/tip-calculator-app-ugJNGbJUX)
