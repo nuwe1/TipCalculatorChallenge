@@ -1,3 +1,73 @@
-// Place all the styles related to the Tips controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: https://sass-lang.com/
+// Import Google Fonts
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@700&display=swap');
+
+// Define color variables for reusability
+$very-dark-cyan: hsl(183, 100%, 15%);
+$dark-grayish-cyan: hsl(186, 14%, 43%);
+$grayish-cyan: hsl(184, 14%, 56%);
+$light-grayish-cyan: hsl(185, 41%, 84%);
+$very-light-grayish-cyan: hsl(189, 41%, 97%);
+$strong-cyan: #00b3b3;
+$white: hsl(0, 0%, 100%);
+
+// Global body styling
+body {
+  font-family: 'Space Mono', monospace !important;
+  font-weight: 700 !important;
+  font-style: normal !important;
+  background-color: $light-grayish-cyan;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+// Font styling for elements using the "element-font" class
+.element-font {
+  font-family: 'Space Mono', monospace !important;
+  font-weight: 700 !important;
+  font-style: normal !important;
+}
+
+// Uppercase button text class
+.uppercase-button {
+  text-transform: uppercase !important;
+}
+
+// Background color utility classes
+.bg-very-dark-cyan { background-color: $very-dark-cyan !important; }
+.bg-dark-grayish-cyan { background-color: $dark-grayish-cyan !important; }
+.bg-grayish-cyan { background-color: $grayish-cyan !important; }
+.bg-light-grayish-cyan { background-color: $light-grayish-cyan !important; }
+.bg-very-light-grayish-cyan { background-color: $very-light-grayish-cyan !important; }
+.bg-strong-cyan { background-color: $strong-cyan !important; }
+.bg-white { background-color: $white !important; }
+
+// Text color utility classes
+.text-very-dark-cyan { color: $very-dark-cyan !important; }
+.text-dark-grayish-cyan { color: $dark-grayish-cyan !important; }
+.text-grayish-cyan { color: $grayish-cyan !important; }
+.text-light-grayish-cyan { color: $light-grayish-cyan !important; }
+.text-very-light-grayish-cyan { color: $very-light-grayish-cyan !important; }
+.text-strong-cyan { color: $strong-cyan !important; }
+.text-white { color: $white !important; }
+
+// Utility class for rounded corners
+.rounded-corners {
+  border-radius: 1.25rem !important;
+}
+
+// Highlight selected button or input
+.is-selected {
+  background-color: $light-grayish-cyan !important;
+  color: $very-dark-cyan !important;
+}
+
+// Additional styles for selected input field
+input.is-selected {
+  border-color: $very-dark-cyan !important;
+  color: $very-dark-cyan !important;
+  background-color: $white !important;
+}

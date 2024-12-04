@@ -1,0 +1,162 @@
+<div class="container" data-controller="reset">
+  <% if flash[:errors].present? %>
+    <div class="error-messages">
+      <ul>
+        <% flash[:errors].each do |field, message| %>
+          <li><strong><%= field.to_s.humanize %>:</strong> <%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <% if flash[:notice].present? %>
+    <div class="notification is-success" data-reset-target="delete">
+    <button class="delete"></button>
+    <p><%= flash[:notice] %></p>
+  </div>
+  <% end %>
+
+  <!-- Header Section -->
+  <div class="header has-text-centered" style="margin-bottom: 6rem;">
+    <%= link_to root_path do %>
+      <%= image_tag "logo.svg", alt: "App Logo" %>
+    <% end %>
+  </div>
+
+  <!-- Box and Block Div with Rounded Corners -->
+  <div class="box rounded-corners p-6">
+    <div class="block">
+      <!-- Columns Section -->
+      <div data-controller="radio-buttons" class="columns is-centered">
+
+        <!-- First Half: Input Section with Rounded Corners -->
+        <div class="column is-half pr-6">
+          <%= form_with model: @tip_calculation, url: calculate_tips_path, method: :post, html: { id: "tip-form" } do |f| %>
+
+            <div class="field">
+              <label class="label text-dark-grayish-cyan">Bill</label>
+              <div class="control has-icons-left">
+                <% if flash[:errors]&.key?(:bill_amount) %>
+                  <p class="error-message"><%= flash[:errors][:bill_amount] %></p>
+                <% end %>
+                <%= f.number_field :bill_amount, value: 0.00, min: 0.01, class: "input is-medium element-font has-text-right", step: 0.01, required: true, data: { action: "input->radio-buttons#captureBillAmount", "radio-buttons-target": "billAmountInput" } %>
+                <span class="icon is-small is-left">
+                  <%= image_tag "icon-dollar.svg" %>
+                </span>
+              </div>
+            </div>
+
+            <!-- Button Group with Stimulus Controller -->
+            <div class="control">
+              <label class="label text-dark-grayish-cyan">Select Tip %</label>
+              <div class="columns is-multiline is-mobile">
+                <div class="column is-half-mobile is-one-third-tablet is-one-third-desktop">
+                  <label class="container" data-radio-buttons-target="container">
+                    <%= button_tag "5%", class: "button custom-button bg-very-dark-cyan text-white is-medium is-fullwidth element-font", data: { action: "click->radio-buttons#select", value: "5" } %>
+                  </label>
+                </div>
+                <div class="column is-half-mobile is-one-third-tablet is-one-third-desktop">
+                  <label class="container" data-radio-buttons-target="container">
+                    <%= button_tag "10%", class: "button custom-button bg-very-dark-cyan text-white is-medium is-fullwidth element-font", data: { action: "click->radio-buttons#select", value: "10" } %>
+                  </label>
+                </div>
+                <div class="column is-half-mobile is-one-third-tablet is-one-third-desktop">
+                  <label class="container" data-radio-buttons-target="container">
+                    <%= button_tag "15%", class: "button custom-button bg-very-dark-cyan text-white is-medium is-fullwidth element-font", data: { action: "click->radio-buttons#select", value: "15" } %>
+                  </label>
+                </div>
+                <div class="column is-half-mobile is-one-third-tablet is-one-third-desktop">
+                  <label class="container" data-radio-buttons-target="container">
+                    <%= button_tag "25%", class: "button custom-button bg-very-dark-cyan text-white is-medium is-fullwidth element-font", data: { action: "click->radio-buttons#select", value: "25" } %>
+                  </label>
+                </div>
+                <div class="column is-half-mobile is-one-third-tablet is-one-third-desktop">
+                  <label class="container" data-radio-buttons-target="container">
+                    <%= button_tag "50%", class: "button custom-button bg-very-dark-cyan text-white is-medium is-fullwidth element-font", data: { action: "click->radio-buttons#select", value: "50" } %>
+                  </label>
+                </div>
+                <div class="column is-half-mobile is-one-third-tablet is-one-third-desktop">
+                  <!-- Custom Tip Input Field -->
+                  <label class="container" data-radio-buttons-target="container">
+                    <%= f.number_field :custom_tip_percentage, value: nil, min: 1, class: "input has-text-right is-medium element-font", data: { action: "input->radio-buttons#select" }, step: 1, required: false %>
+                  </label>
+                </div>
+              </div>
+              <!-- Hidden input for custom tip percentage -->
+              <%= f.hidden_field :tip_percentage, value: "", id: "tip_percentage", data: { radio_buttons_target: "customTipInput" } %>
+            </div>
+
+            <div class="field mt-2">
+              <label class="label text-dark-grayish-cyan">Number of People</label>
+              <div class="control has-icons-left">
+                <% if flash[:errors]&.key?(:number_of_people) %>
+                  <p class="error-message">error<%= flash[:errors][:number_of_people] %></p>
+                <% end %>
+                <%= f.number_field :number_of_people, min: 1, value: 0, class: "input is-medium element-font has-text-right", step: 1, required: true %>
+                <span class="icon is-small is-left">
+                  <%= image_tag "icon-person.svg" %>
+                </span>
+              </div>
+            </div>
+
+        </div>
+
+        <!-- Second Half: Results Section with Rounded Corners -->
+        <div class="column is-half rounded-corners bg-very-dark-cyan">
+          <div class="content p-5 mt-3">
+
+            <!-- Tip Amount -->
+            <div class="columns is-vcentered is-centered">
+              <div class="column has-text-left is-half">
+                <p class="text-white">
+                  Tip Amount
+                  <br>
+                  <span class="text-dark-grayish-cyan">
+                    <small>/ person</small>
+                  </span>
+                </p>
+              </div>
+              <div class="column has-text-right is-half">
+                <p class="title is-2 text-grayish-cyan">
+                  <span class="icon-text" data-radio-buttons-target="tipAmountOutput">
+                    &dollar;
+                    <%= @tip_per_person || "0.00" %>
+                  </span>
+                </p>
+              </div>
+            </div>
+
+            <!-- Total -->
+            <div class="columns is-vcentered is-centered mt-5">
+              <div class="column has-text-left is-half">
+                <p class="text-white">
+                  Total
+                  <br>
+                  <span class="text-dark-grayish-cyan">
+                    <small>/ person</small>
+                  </span>
+                </p>
+              </div>
+              <div class="column has-text-right is-half">
+                <p class="title is-2 text-grayish-cyan">
+                  <span class="icon-text" data-radio-buttons-target="totalBillOutput">
+                    &dollar;
+                    <%= @total_per_person || "0.00" %>
+                  </span>
+                </p>
+              </div>
+            </div>
+
+            <!-- Reset Button/Submit Button -->
+            <div class="field" style="margin-top: 6rem;">
+              <div class="control">
+                <%= f.submit "Reset", class: "button bg-light-grayish-cyan uppercase-button element-font is-fullwidth" %>
+              </div>
+            </div>
+
+          <% end %> <!-- simple_form_for closing tag -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

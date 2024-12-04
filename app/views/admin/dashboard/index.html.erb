@@ -1,2 +1,28 @@
-<h1>Admin::Dashboard#index</h1>
-<p>Find me in app/views/admin/dashboard/index.html.erb</p>
+<h1>Admin Dashboard</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Bill Amount</th>
+      <th>Tip Percentage</th>
+      <th>Tip Amount</th>
+      <th>Total Bill</th>
+      <th>Number of People</th>
+      <th>Per-Person Amount</th>
+      <th>Timestamp</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @calculations.each do |calculation| %>
+      <tr>
+        <td><%= number_to_currency(calculation.bill_amount) %></td>
+        <td><%= calculation.tip_percentage %>%</td>
+        <td><%= number_to_currency(calculation.tip_amount) %></td>
+        <td><%= number_to_currency(calculation.total_bill) %></td>
+        <td><%= calculation.number_of_people %></td>
+        <td><%= number_to_currency(calculation.per_person_amount) %></td>
+        <td><%= calculation.created_at.strftime("%Y-%m-%d %H:%M:%S") %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
