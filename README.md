@@ -2,6 +2,19 @@
 
 Welcome to the **Tip Calculator Challenge**! This Ruby on Rails application is a web-based tip calculator with an additional **Admin Dashboard** to track past tip calculations. The project demonstrates the use of Ruby on Rails for building functional, user-friendly applications while maintaining clean, maintainable code.
 
+## Screenshots
+
+Below are some screenshots of the **Tip Calculator** and **Admin Dashboard** features:
+
+### Tip Calculator Page
+![Homepage Screenshot](screenshots/homepage_screenshot.png)
+
+### Admin Dashboard
+![Dashboard Screenshot](screenshots/dashboard_screenshot.png)
+
+### User-Friendly Interface
+The application is designed to be intuitive and easy to use, with clear input fields and responsive layouts.
+
 ## Features
 
 ### Core Functionality
@@ -99,13 +112,18 @@ You can run the application using Docker (recommended) or set it up directly on 
 
 ### Technologies Used
 - **Ruby on Rails**: Framework for building the application.
-- **PostgreSQL**: Database to store tip calculation records.
+- **SQLite3**: Database to store tip calculation records.
+- **StimulusJS**: For Javascript functionality.
+- **Bulma**: A modern CSS framework for styling the frontend.
+- **Sass**: For writing more maintainable and efficient CSS.
 - **Docker**: Containerized setup for easy local development.
-- **RSpec & Jest**: For testing the backend and frontend functionality.
+- **RSpec**: For testing the backend functionality.
 
 ## Testing
 
 To ensure the application functions correctly, follow these steps:
+
+### With Docker
 
 1. **Start the Application**:
    ```bash
@@ -126,12 +144,33 @@ To ensure the application functions correctly, follow these steps:
      docker-compose run -e "RAILS_ENV=test" app rspec spec/path/to/spec.rb
      ```
 
-## Screenshots
-![Homepage Screenshot](screenshots/homepage_screenshot.png)
-![Dashboard Screenshot](screenshots/dashboard_screenshot.png)
+### Without Docker
+
+If you prefer to run the tests without Docker, follow these steps:
+
+1. **Setup the Test Database**:
+   Ensure you have set up the database correctly by running:
+   ```bash
+   rails db:create db:migrate RAILS_ENV=test
+   ```
+
+2. **Run Backend Tests**:
+   Run all tests using the command:
+   ```bash
+   rails test
+   ```
+
+3. **Run Individual Tests**:
+   For running specific tests, use:
+   ```bash
+   rspec spec/path/to/spec.rb
+   ```
+
+**Note**: The tests included in this project are for the **backend functionality** only (Ruby tests). Frontend or JavaScript tests were not included in this project.
 
 ## Resources
 
 - [Ruby on Rails Guides](https://guides.rubyonrails.org/)
 - [Frontend Mentor Tip Calculator](https://www.frontendmentor.io/challenges/tip-calculator-app-ugJNGbJUX)
 - [Docker Documentation](https://www.docker.com)
+- [Stimulus.js Documentation](https://stimulus.hotwired.dev/)
